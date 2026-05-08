@@ -6,7 +6,7 @@ The adaptive app samples demonstrate best practices for building Android apps th
 
 ## Samples
 
-### [Canonical Layouts](./CanonicalLayouts)
+### [Canonical layouts](./CanonicalLayouts)
 
 Proven design patterns for large screens:
 - **List-Detail**: Optimal for browsing content and seeing details side-by-side
