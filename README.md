@@ -21,11 +21,11 @@ A media streaming app that adapts to various form factors using a single binary.
 
 See the [Adaptive JetStream README](./AdaptiveJetStream/README.md) to learn more.
 
-### [Adaptive Navigation Sample](./AdaptiveNavigationSample)
+### [Adaptive navigation](./AdaptiveNavigationSample)
 
 A navigation app that uses `NavigationSuiteScaffold` to align navigation icons vertically (top, center, or bottom) within a navigation rail, adapting to different screen sizes and user preferences.
 
-See the [Adaptive Navigation Sample README](./AdaptiveNavigationSample/README.md) for all the details.
+See the [Adaptive Navigation README](./AdaptiveNavigationSample/README.md) for all the details.
 
 ## Get started
 
