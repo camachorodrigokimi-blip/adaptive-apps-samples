@@ -25,7 +25,7 @@ See the [Adaptive JetStream README](./AdaptiveJetStream/README.md) to learn more
 
 A navigation app that uses `NavigationSuiteScaffold` to align navigation icons vertically (top, center, or bottom) within a navigation rail, adapting to different screen sizes and user preferences.
 
-See the [Adaptive Navigation README](./AdaptiveNavigationSample/README.md) for all the details.
+See the [Adaptive navigation README](./AdaptiveNavigationSample/README.md) for all the details.
 
 ## Get started
 
