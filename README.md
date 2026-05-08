@@ -27,7 +27,7 @@ A navigation app that uses `NavigationSuiteScaffold` to align navigation icons v
 
 See the [Adaptive Navigation Sample README](./AdaptiveNavigationSample/README.md) for all the details.
 
-## Getting started
+## Get started
 
 To explore the samples:
 1. Clone this repository.
@@ -37,4 +37,4 @@ To explore the samples:
 
 This project is licensed under the Apache License, Version 2.0.
 
-See the [LICENSE](LICENSE) file for details.
+See the [LICENSE](LICENSE.md) file for details.
