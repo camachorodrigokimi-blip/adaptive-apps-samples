@@ -1,19 +1,20 @@
-package com.example.flexboxsample.ui.main
+package com.example.flexboxsample
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalFlexBoxApi
+import androidx.compose.foundation.layout.FlexAlignItems
 import androidx.compose.foundation.layout.FlexBox
+import androidx.compose.foundation.layout.FlexDirection
+import androidx.compose.foundation.layout.FlexJustifyContent
+import androidx.compose.foundation.layout.FlexWrap
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.layout.FlexDirection
-import androidx.compose.foundation.layout.FlexAlignItems
-import androidx.compose.foundation.layout.FlexJustifyContent
-import androidx.compose.foundation.layout.FlexWrap
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -25,38 +26,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.runtime.getValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.flexboxsample.data.DefaultDataRepository
 import com.example.flexboxsample.theme.MyApplicationTheme
-
-@Composable
-fun MainScreen(
-  modifier: Modifier = Modifier,
-  viewModel: MainScreenViewModel = viewModel { MainScreenViewModel(DefaultDataRepository()) },
-) {
-  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-  when (uiState) {
-    is MainScreenUiState.Loading -> {
-      // Statically render or show loading, but for the sample we render the FlexBox examples
-      MainScreenContent(modifier = modifier)
-    }
-    is MainScreenUiState.Success -> {
-      MainScreenContent(modifier = modifier)
-    }
-    is MainScreenUiState.Error -> {
-      // Render error state or default examples
-      MainScreenContent(modifier = modifier)
-    }
-  }
-}
 
 @OptIn(ExperimentalFlexBoxApi::class)
 @Composable
-internal fun MainScreenContent(modifier: Modifier = Modifier) {
-  Column(modifier = Modifier.safeDrawingPadding().then(modifier).verticalScroll(rememberScrollState())) {
+fun FlexBoxSample(modifier: Modifier = Modifier) {
+  Column(modifier = Modifier.safeDrawingPadding().then(modifier).fillMaxSize().verticalScroll(rememberScrollState())) {
     Text("FlexBox examples", fontSize = 32.sp, modifier = Modifier.padding(bottom = 16.dp))
     Text("Example 0: Column direction (center)", fontSize = 18.sp, modifier = Modifier.padding(vertical = 8.dp))
     FlexBox(
@@ -100,7 +75,6 @@ internal fun MainScreenContent(modifier: Modifier = Modifier) {
       },
       modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceVariant).padding(8.dp)
     ) {
-      // All boxes have a basis of 100.dp
       Box(Modifier.height(50.dp).background(Color(0xFFFF0000), RoundedCornerShape(8.dp)).flex { basis(100.dp) }) {
           Text("Basis: 100dp\nGrow: 0f", color = Color.White, fontSize = 14.sp, modifier = Modifier.padding(4.dp))
       }
@@ -150,6 +124,6 @@ internal fun MainScreenContent(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenPreview() {
-  MyApplicationTheme { MainScreenContent() }
+fun FlexBoxSamplePreview() {
+  MyApplicationTheme { FlexBoxSample() }
 }
