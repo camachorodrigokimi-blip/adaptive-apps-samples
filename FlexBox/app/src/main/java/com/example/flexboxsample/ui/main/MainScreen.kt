@@ -25,14 +25,32 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.flexboxsample.data.DefaultDataRepository
 import com.example.flexboxsample.theme.MyApplicationTheme
 
 @Composable
 fun MainScreen(
   modifier: Modifier = Modifier,
+  viewModel: MainScreenViewModel = viewModel { MainScreenViewModel(DefaultDataRepository()) },
 ) {
-  // We ignore the repository data for now and just show the examples
-  MainScreenContent(modifier = modifier)
+  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+  when (uiState) {
+    is MainScreenUiState.Loading -> {
+      // Statically render or show loading, but for the sample we render the FlexBox examples
+      MainScreenContent(modifier = modifier)
+    }
+    is MainScreenUiState.Success -> {
+      MainScreenContent(modifier = modifier)
+    }
+    is MainScreenUiState.Error -> {
+      // Render error state or default examples
+      MainScreenContent(modifier = modifier)
+    }
+  }
 }
 
 @OptIn(ExperimentalFlexBoxApi::class)

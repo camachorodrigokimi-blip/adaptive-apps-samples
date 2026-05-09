@@ -19,7 +19,7 @@ class MainScreenViewModel(dataRepository: DataRepository) : ViewModel() {
 }
 
 sealed interface MainScreenUiState {
-  object Loading : MainScreenUiState
+  data object Loading : MainScreenUiState
 
   data class Error(val throwable: Throwable) : MainScreenUiState
 
