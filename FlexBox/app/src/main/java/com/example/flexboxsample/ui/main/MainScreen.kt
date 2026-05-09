@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.FlexBox
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.FlexDirection
@@ -18,6 +17,7 @@ import androidx.compose.foundation.layout.FlexWrap
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -56,7 +56,7 @@ fun MainScreen(
 @OptIn(ExperimentalFlexBoxApi::class)
 @Composable
 internal fun MainScreenContent(modifier: Modifier = Modifier) {
-  Column(modifier = modifier.safeDrawingPadding().verticalScroll(rememberScrollState())) {
+  Column(modifier = Modifier.safeDrawingPadding().then(modifier).verticalScroll(rememberScrollState())) {
     Text("FlexBox examples", fontSize = 32.sp, modifier = Modifier.padding(bottom = 16.dp))
     Text("Example 0: Column direction (center)", fontSize = 18.sp, modifier = Modifier.padding(vertical = 8.dp))
     FlexBox(
@@ -65,7 +65,7 @@ internal fun MainScreenContent(modifier: Modifier = Modifier) {
         alignItems(FlexAlignItems.Center)
         justifyContent(FlexJustifyContent.Center)
       },
-      modifier = Modifier.fillMaxWidth().height(133.dp).background(Color(0xFFE0E0E0)).padding(8.dp)
+      modifier = Modifier.fillMaxWidth().height(133.dp).background(MaterialTheme.colorScheme.surfaceVariant).padding(8.dp)
     ) {
       Text(text = "Hello,", fontSize = 32.sp)
       Text(text = "World!", fontSize = 32.sp)
@@ -78,7 +78,7 @@ internal fun MainScreenContent(modifier: Modifier = Modifier) {
         direction(FlexDirection.Row)
         justifyContent(FlexJustifyContent.SpaceBetween)
       },
-      modifier = Modifier.fillMaxWidth().background(Color(0xFFE0E0E0)).padding(8.dp)
+      modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceVariant).padding(8.dp)
     ) {
       Box(Modifier.height(50.dp).background(Color(0xFFFF0000), RoundedCornerShape(8.dp)).flex { basis(90.dp); grow(0f); shrink(1f) }) {
           Text("Basis: 90dp\nGrow: 0f\nShrink: 1f", color = Color.White, fontSize = 12.sp, modifier = Modifier.padding(4.dp))
@@ -98,7 +98,7 @@ internal fun MainScreenContent(modifier: Modifier = Modifier) {
         wrap(FlexWrap.Wrap)
         gap(8.dp)
       },
-      modifier = Modifier.fillMaxWidth().background(Color(0xFFE0E0E0)).padding(8.dp)
+      modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceVariant).padding(8.dp)
     ) {
       // All boxes have a basis of 100.dp
       Box(Modifier.height(50.dp).background(Color(0xFFFF0000), RoundedCornerShape(8.dp)).flex { basis(100.dp) }) {
@@ -124,7 +124,7 @@ internal fun MainScreenContent(modifier: Modifier = Modifier) {
         config = {
             direction(FlexDirection.Row)
         },
-        modifier = Modifier.fillMaxWidth().background(Color(0xFFE0E0E0)).padding(8.dp)
+        modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceVariant).padding(8.dp)
     ) {
         Box(Modifier.height(50.dp).background(Color(0xFFFF0000)).flex {
             basis(160.dp)
