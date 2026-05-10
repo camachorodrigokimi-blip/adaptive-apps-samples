@@ -19,7 +19,7 @@ class FlexBoxSampleTest {
 
   @Test
   fun flexboxExamples_exist() {
-    composeTestRule.onNodeWithText("FlexBox examples").assertExists()
+    composeTestRule.onNodeWithText("FlexBox sample").assertExists()
     composeTestRule.onNodeWithText("Example 0: Column direction (center)").assertExists()
   }
 }

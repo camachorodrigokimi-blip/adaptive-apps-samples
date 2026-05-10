@@ -26,13 +26,33 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.FontWeight
 import com.example.flexboxsample.theme.MyApplicationTheme
 
 @OptIn(ExperimentalFlexBoxApi::class)
 @Composable
 fun FlexBoxSample(modifier: Modifier = Modifier) {
-  Column(modifier = Modifier.safeDrawingPadding().then(modifier).fillMaxSize().verticalScroll(rememberScrollState())) {
-    Text("FlexBox examples", fontSize = 32.sp, modifier = Modifier.padding(bottom = 16.dp))
+  Column(
+    modifier = Modifier
+      .safeDrawingPadding()
+      .then(modifier)
+      .fillMaxSize()
+      .padding(16.dp)
+      .verticalScroll(rememberScrollState())
+  ) {
+    Text(
+      text = "FlexBox sample",
+      fontSize = 30.sp,
+      fontWeight = FontWeight.Bold,
+      color = MaterialTheme.colorScheme.onBackground,
+      modifier = Modifier.padding(bottom = 8.dp)
+    )
+    Text(
+      text = "Display FlexBox layout variations on this device.",
+      fontSize = 14.sp,
+      color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
+      modifier = Modifier.padding(bottom = 16.dp)
+    )
     Text("Example 0: Column direction (center)", fontSize = 18.sp, modifier = Modifier.padding(vertical = 8.dp))
     FlexBox(
       config = {
@@ -101,22 +121,22 @@ fun FlexBoxSample(modifier: Modifier = Modifier) {
         modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceVariant).padding(8.dp)
     ) {
         Box(Modifier.height(50.dp).background(Color(0xFFFF0000)).flex {
-            basis(160.dp)
-            shrink(1f)
+            basis(300.dp)
+            shrink(3f)
         }) {
-            Text("Basis: 160dp\nShrink: 1f", color = Color.White, fontSize = 12.sp, modifier = Modifier.padding(4.dp))
+            Text("Basis: 300dp\nShrink: 3f", color = Color.White, fontSize = 12.sp, modifier = Modifier.padding(4.dp))
         }
         Box(Modifier.height(50.dp).background(Color(0xFF0000FF)).flex {
-            basis(160.dp)
+            basis(300.dp)
             shrink(2f)
         }) {
-            Text("Basis: 160dp\nShrink: 2f", color = Color.White, fontSize = 12.sp, modifier = Modifier.padding(4.dp))
+            Text("Basis: 300dp\nShrink: 2f", color = Color.White, fontSize = 12.sp, modifier = Modifier.padding(4.dp))
         }
         Box(Modifier.height(50.dp).background(Color(0xFF00FF00)).flex {
-            basis(160.dp)
-            shrink(0f)
+            basis(300.dp)
+            shrink(1f)
         }) {
-             Text("Basis: 160dp\nShrink: 0f", color = Color.Black, fontSize = 12.sp, modifier = Modifier.padding(4.dp))
+             Text("Basis: 300dp\nShrink: 1f", color = Color.Black, fontSize = 12.sp, modifier = Modifier.padding(4.dp))
         }
     }
   }
