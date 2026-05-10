@@ -1,6 +1,6 @@
 # MediaQuery sample
 
-This sample demonstrates how to build highly responsive and adaptive UIs utilizing Compose's experimental `mediaQuery` API.
+Build responsive and adaptive UIs with Compose's experimental `mediaQuery` API.
 
 ## Features demonstrated
 - **Fold posture detection:** Adapts layout when a foldable device is folded into `Tabletop` posture.
