@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -61,7 +62,7 @@ fun GridSample() {
         ) {
             for (index in 0 until 10) {
                 val bgColor = colors[index % colors.size]
-                val isLight = (bgColor.red * 0.299 + bgColor.green * 0.587 + bgColor.blue * 0.114) > 0.5
+                val isLight = bgColor.luminance() > 0.5f
                 val textColor = if (isLight) Color.Black else Color.White
 
                 val itemModifier = when (index) {
