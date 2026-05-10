@@ -37,7 +37,7 @@ See the [FlexBox README](./FlexBox/README.md) for more details.
 
 Demonstrates a responsive, multi-column content layout that dynamically adjusts column spans and weights based on the device's screen dimensions using Compose Grid layout APIs.
 
-See the [Grid README](./Grid/README.md) for more details.
+See the [Grid README](./Grid/README.md).
 
 ### [MediaQuery](./MediaQuery)
 
