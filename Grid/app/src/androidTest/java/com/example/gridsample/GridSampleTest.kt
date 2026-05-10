@@ -17,7 +17,7 @@ class GridSampleTest {
 
   @Test
   fun gridSample_rendersCorrectly() {
-    composeTestRule.onNodeWithText("Grid example").assertExists()
-    composeTestRule.onNodeWithText("Three-column layout using Grid.").assertExists()
+    composeTestRule.onNodeWithText("Grid sample").assertExists()
+    composeTestRule.onNodeWithText("Display Grid layout variations on this device.").assertExists()
   }
 }
