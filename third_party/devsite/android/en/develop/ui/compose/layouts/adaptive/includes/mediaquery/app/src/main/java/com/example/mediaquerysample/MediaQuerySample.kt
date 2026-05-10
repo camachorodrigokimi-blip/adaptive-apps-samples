@@ -51,7 +51,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun MediaQueryDashboard() {
+fun MediaQuerySample() {
     Column(
         modifier = Modifier
             .safeDrawingPadding()

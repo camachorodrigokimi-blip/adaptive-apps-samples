@@ -18,11 +18,11 @@ class MediaQuerySampleTest {
   @Before
   fun setup() {
     ComposeUiFlags.isMediaQueryIntegrationEnabled = true
-    composeTestRule.setContent { MediaQueryDashboard() }
+    composeTestRule.setContent { MediaQuerySample() }
   }
 
   @Test
-  fun mediaQueryDashboard_rendersSuccessfully() {
+  fun mediaQuerySample_rendersSuccessfully() {
     composeTestRule.onNodeWithText("MediaQuery sample").assertExists()
     composeTestRule.onNodeWithText("Device specs and orientation").assertExists()
     composeTestRule.onNodeWithText("Input peripherals").assertExists()
