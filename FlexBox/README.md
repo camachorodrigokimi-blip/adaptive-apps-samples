@@ -1,6 +1,6 @@
 # FlexBox layout sample
 
-This sample demonstrates how to use the Jetpack Compose `FlexBox` API to create flexible, wrapped, and responsive column/row structures that adapt automatically to available layout width.
+Build flexible, wrapped, and responsive column/row structures that adapt automatically to display dimensions using Jetpack Compose FlexBox layout APIs.
 
 ## Features demonstrated
 - **Dynamic wrapping:** Content wrapped inside row/column lines as width adapts.
