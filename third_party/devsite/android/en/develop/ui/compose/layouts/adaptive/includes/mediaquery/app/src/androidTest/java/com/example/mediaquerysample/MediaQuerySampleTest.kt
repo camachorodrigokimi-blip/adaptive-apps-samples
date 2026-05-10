@@ -23,7 +23,7 @@ class MediaQuerySampleTest {
 
   @Test
   fun mediaQueryDashboard_rendersSuccessfully() {
-    composeTestRule.onNodeWithText("MediaQuery example").assertExists()
+    composeTestRule.onNodeWithText("MediaQuery sample").assertExists()
     composeTestRule.onNodeWithText("Device specs and orientation").assertExists()
     composeTestRule.onNodeWithText("Input peripherals").assertExists()
     composeTestRule.onNodeWithText("Touch target sizing").assertExists()

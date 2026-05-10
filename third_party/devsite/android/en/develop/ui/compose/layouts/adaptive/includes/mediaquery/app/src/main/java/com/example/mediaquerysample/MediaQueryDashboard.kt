@@ -75,7 +75,7 @@ fun MediaQueryDashboard() {
                 .verticalScroll(rememberScrollState())
         ) {
             Text(
-                text = "MediaQuery example",
+                text = "MediaQuery sample",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground,
@@ -83,7 +83,7 @@ fun MediaQueryDashboard() {
             )
 
             Text(
-                text = "Display MediaQuery values on this device.",
+                text = "Display MediaQuery values of this device.",
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
                 modifier = Modifier.padding(bottom = 16.dp)
