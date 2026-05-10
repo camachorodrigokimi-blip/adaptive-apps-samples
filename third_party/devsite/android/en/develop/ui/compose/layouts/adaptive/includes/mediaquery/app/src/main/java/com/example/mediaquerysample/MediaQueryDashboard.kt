@@ -4,9 +4,7 @@
 )
 package com.example.mediaquerysample
 
-import android.content.res.Configuration
 import android.os.Build
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -66,69 +64,71 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun MediaQueryDashboard() {
-        Column(
-            modifier = Modifier
-                .safeDrawingPadding()
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(16.dp)
-                .verticalScroll(rememberScrollState())
-        ) {
-            Text(
-                text = "MediaQuery sample",
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
+    Column(
+        modifier = Modifier
+            .safeDrawingPadding()
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        Text(
+            text = "MediaQuery sample",
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
 
-            Text(
-                text = "Display MediaQuery values of this device.",
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
+        Text(
+            text = "Display MediaQuery values of this device.",
+            fontSize = 14.sp,
+            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
 
+        DeviceInfoCard()
 
+        Spacer(modifier = Modifier.height(16.dp))
 
-            DeviceInfoCard()
+        // --- Main Layout Adaptation ---
+        val isLargeScreen by derivedMediaQuery { windowWidth >= 600.dp }
 
+        val leftColumnContent = @Composable {
+            PostureCard()
             Spacer(modifier = Modifier.height(16.dp))
+            PeripheralsCard()
+            Spacer(modifier = Modifier.height(16.dp))
+            TouchTargetSizeCard()
+        }
 
-            // --- Main Layout Adaptation ---
-            val isLargeScreen by derivedMediaQuery { windowWidth >= 600.dp }
-            if (isLargeScreen) {
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        PostureCard()
-                        Spacer(modifier = Modifier.height(16.dp))
-                        PeripheralsCard()
-                        Spacer(modifier = Modifier.height(16.dp))
-                        TouchTargetSizeCard()
-                    }
-                    Column(modifier = Modifier.weight(1f)) {
-                        SensorsCard()
-                        Spacer(modifier = Modifier.height(16.dp))
-                        ViewingDistanceCard()
-                    }
+        val rightColumnContent = @Composable {
+            SensorsCard()
+            Spacer(modifier = Modifier.height(16.dp))
+            ViewingDistanceCard()
+        }
+
+        if (isLargeScreen) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                Column(modifier = Modifier.weight(1f)) {
+                    leftColumnContent()
                 }
-            } else {
-                PostureCard()
+                Column(modifier = Modifier.weight(1f)) {
+                    rightColumnContent()
+                }
+            }
+        } else {
+            Column(modifier = Modifier.fillMaxWidth()) {
+                leftColumnContent()
                 Spacer(modifier = Modifier.height(16.dp))
-                PeripheralsCard()
-                Spacer(modifier = Modifier.height(16.dp))
-                TouchTargetSizeCard()
-                Spacer(modifier = Modifier.height(16.dp))
-                SensorsCard()
-                Spacer(modifier = Modifier.height(16.dp))
-                ViewingDistanceCard()
+                rightColumnContent()
             }
         }
+    }
 }
 
 
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PostureCard() {
     val isTabletop = mediaQuery { windowPosture == Posture.Tabletop }
@@ -182,7 +182,6 @@ fun PostureCard() {
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PeripheralsCard() {
     val keyboardKind = mediaQuery { keyboardKind }
@@ -240,7 +239,6 @@ fun PeripheralsCard() {
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun TouchTargetSizeCard() {
     val pointerPrecision = mediaQuery { pointerPrecision }
@@ -289,7 +287,6 @@ fun TouchTargetSizeCard() {
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SensorsCard() {
     val hasCamera = mediaQuery { hasCamera }
@@ -316,7 +313,6 @@ fun SensorsCard() {
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ViewingDistanceCard() {
     val viewingDistance = mediaQuery { viewingDistance }
@@ -382,8 +378,9 @@ fun SensorIndicator(label: String, isSupported: Boolean) {
 
 @Composable
 fun DeviceInfoCard() {
-    val configuration = LocalConfiguration.current
-    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+    val windowWidth = mediaQuery { windowWidth }
+    val windowHeight = mediaQuery { windowHeight }
+    val isLandscape = windowWidth > windowHeight
 
     val manufacturer = Build.MANUFACTURER.replaceFirstChar { it.uppercaseChar() }
     val model = Build.MODEL
@@ -410,7 +407,7 @@ fun DeviceInfoCard() {
                     Text(text = "Model: $manufacturer $model", fontSize = 14.sp, fontWeight = FontWeight.Medium)
                     Text(text = "Android API Level: $sdk", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
                     Text(
-                        text = "Viewport: ${configuration.screenWidthDp}dp x ${configuration.screenHeightDp}dp",
+                        text = "Viewport: $windowWidth x $windowHeight",
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                     )
