@@ -27,6 +27,22 @@ A navigation app that uses `NavigationSuiteScaffold` to align navigation icons v
 
 See the [Adaptive navigation README](./AdaptiveNavigationSample/README.md) for all the details.
 
+### [FlexBox](./FlexBox)
+
+Demonstrates dynamic wrapping, resizing, basis and shrink properties using Jetpack Compose FlexBox layout APIs for responsive content flow.
+
+See the [FlexBox README](./FlexBox/README.md) for more details.
+
+### [Grid](./Grid)
+
+Demonstrates a responsive, multi-column content layout that dynamically adjusts column spans and weights based on the device's screen dimensions using Compose Grid layout APIs.
+
+See the [Grid README](./Grid/README.md) for more details.
+
+### [MediaQuery](./third_party/devsite/android/en/develop/ui/compose/layouts/adaptive/includes/mediaquery)
+
+Demonstrates real-time layout adaptation utilizing the experimental `mediaQuery` API in Jetpack Compose. Adapts layout elements based on screen size, device fold posture, precision of pointer devices, physical viewing distance, and active hardware sensors.
+
 ## Get started
 
 To explore the samples:
