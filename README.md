@@ -39,9 +39,11 @@ Demonstrates a responsive, multi-column content layout that dynamically adjusts 
 
 See the [Grid README](./Grid/README.md) for more details.
 
-### [MediaQuery](./third_party/devsite/android/en/develop/ui/compose/layouts/adaptive/includes/mediaquery)
+### [MediaQuery](./MediaQuery)
 
 Demonstrates real-time layout adaptation utilizing the experimental `mediaQuery` API in Jetpack Compose. Adapts layout elements based on screen size, device fold posture, precision of pointer devices, physical viewing distance, and active hardware sensors.
+
+See the [MediaQuery README](./MediaQuery/README.md) to learn more.
 
 ## Get started
 
