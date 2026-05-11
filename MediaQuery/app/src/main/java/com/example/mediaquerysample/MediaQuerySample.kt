@@ -75,17 +75,17 @@ fun MediaQuerySample() {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        DeviceInfoCard()
+        WindowInfoCard()
 
         Spacer(modifier = Modifier.height(16.dp))
 
         // --- Main Layout Adaptation ---
-        val isLargeScreen by derivedMediaQuery { windowWidth >= 600.dp }
+        val isAtLeastMediumWindowWidth by derivedMediaQuery { windowWidth >= 600.dp }
 
         val leftColumnContent = @Composable {
             PostureCard()
             Spacer(modifier = Modifier.height(16.dp))
-            PeripheralsCard()
+            KeyboardKindCard()
             Spacer(modifier = Modifier.height(16.dp))
             TouchTargetSizeCard()
         }
@@ -96,7 +96,7 @@ fun MediaQuerySample() {
             ViewingDistanceCard()
         }
 
-        if (isLargeScreen) {
+        if (isAtLeastMediumWindowWidth) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 Column(modifier = Modifier.weight(1f)) {
                     leftColumnContent()
@@ -171,7 +171,7 @@ fun PostureCard() {
 }
 
 @Composable
-fun PeripheralsCard() {
+fun KeyboardKindCard() {
     val keyboardKind = mediaQuery { keyboardKind }
 
     Card(
@@ -180,7 +180,7 @@ fun PeripheralsCard() {
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = "Input peripherals",
+                text = "Keyboard kind",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold
             )
@@ -229,8 +229,15 @@ fun PeripheralsCard() {
 
 @Composable
 fun TouchTargetSizeCard() {
-    val pointerPrecision = mediaQuery { pointerPrecision }
-    val isLowPrecision = pointerPrecision == PointerPrecision.Blunt || pointerPrecision == PointerPrecision.None
+    val primaryContainerColor = MaterialTheme.colorScheme.primaryContainer
+    val (targetHeight, targetColor) = mediaQuery {
+        val isLowPrecision = pointerPrecision == PointerPrecision.Blunt || pointerPrecision == PointerPrecision.None
+        if (isLowPrecision) {
+            64.dp to Color(0xFFFFAB91)
+        } else {
+            44.dp to primaryContainerColor
+        }
+    }
 
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -244,10 +251,6 @@ fun TouchTargetSizeCard() {
             )
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Adapt Button Sizing
-            val targetHeight = if (isLowPrecision) 64.dp else 44.dp
-            val targetColor = if (isLowPrecision) Color(0xFFFFAB91) else MaterialTheme.colorScheme.primaryContainer
-
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -258,6 +261,7 @@ fun TouchTargetSizeCard() {
             ) {
                 val textLuminance = targetColor.luminance()
                 val textColor = if (textLuminance > 0.5f) Color.Black else Color.White
+                val isLowPrecision = targetHeight == 64.dp
                 Text(
                     text = if (isLowPrecision) "Enlarged Touch Target (Low Precision)" else "Standard Clickable Target",
                     color = textColor,
@@ -365,14 +369,21 @@ fun SensorIndicator(label: String, isSupported: Boolean) {
 }
 
 @Composable
-fun DeviceInfoCard() {
-    val windowWidth = mediaQuery { windowWidth }
-    val windowHeight = mediaQuery { windowHeight }
+fun WindowInfoCard() {
+    val windowWidth by derivedMediaQuery { windowWidth }
+    val windowHeight by derivedMediaQuery { windowHeight }
     val isLandscape = windowWidth > windowHeight
 
-    val manufacturer = Build.MANUFACTURER.replaceFirstChar { it.uppercaseChar() }
-    val model = Build.MODEL
-    val sdk = Build.VERSION.SDK_INT
+    val widthSizeClass = when {
+        windowWidth < 600.dp -> "Compact"
+        windowWidth < 840.dp -> "Medium"
+        else -> "Expanded"
+    }
+    val heightSizeClass = when {
+        windowHeight < 480.dp -> "Compact"
+        windowHeight < 900.dp -> "Medium"
+        else -> "Expanded"
+    }
 
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -380,7 +391,7 @@ fun DeviceInfoCard() {
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = "Device specs and orientation",
+                text = "Window info and orientation",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold
             )
@@ -392,8 +403,8 @@ fun DeviceInfoCard() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column {
-                    Text(text = "Model: $manufacturer $model", fontSize = 14.sp, fontWeight = FontWeight.Medium)
-                    Text(text = "Android API Level: $sdk", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
+                    Text(text = "Width Class: $widthSizeClass", fontSize = 14.sp, fontWeight = FontWeight.Medium)
+                    Text(text = "Height Class: $heightSizeClass", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
                     Text(
                         text = "Viewport: $windowWidth x $windowHeight",
                         fontSize = 12.sp,
