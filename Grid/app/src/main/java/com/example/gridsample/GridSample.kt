@@ -31,16 +31,11 @@ import com.example.gridsample.ui.theme.MyApplicationTheme
 @Composable
 fun GridSample() {
     val colors = listOf(
-        Color(0xFFF44336), // Red
-        Color(0xFFE91E63), // Pink
-        Color(0xFF9C27B0), // Purple
-        Color(0xFF3F51B5), // Indigo
-        Color(0xFF2196F3), // Blue
-        Color(0xFF00BCD4), // Cyan
-        Color(0xFF4CAF50), // Green
-        Color(0xFFFFEB3B), // Yellow
-        Color(0xFFFF9800), // Orange
-        Color(0xFF795548)  // Brown
+        Color(0xFF4285F4), // Google Blue
+        Color(0xFFEA4335), // Google Red
+        Color(0xFFFBBC05), // Google Yellow
+        Color(0xFF34A853), // Google Green
+        Color(0xFF000000)  // Black
     )
 
     Column(modifier = Modifier.safeDrawingPadding().padding(16.dp).fillMaxSize().verticalScroll(rememberScrollState())) {
@@ -62,38 +57,79 @@ fun GridSample() {
         Grid(
             config = {
                 repeat(3) { column(0.333f) }
-                gap(4.dp)
+                row(112.dp)
+                row(88.dp)
+                row(100.dp)
+                gap(8.dp)
             },
+            modifier = Modifier.fillMaxWidth()
         ) {
-            for (index in 0 until 10) {
-                val bgColor = colors[index % colors.size]
-                val isLight = bgColor.luminance() > 0.5f
-                val textColor = if (isLight) Color.Black else Color.White
+            Box(
+                modifier = Modifier
+                    .gridItem(rowSpan = 2)
+                    .background(colors[0], shape = RoundedCornerShape(16.dp))
+                    .fillMaxSize()
+            ) {
+                Text(
+                    text = "1",
+                    color = if (colors[0].luminance() > 0.5f) Color.Black else Color.White,
+                    modifier = Modifier.align(Alignment.Center),
+                    fontSize = 40.sp
+                )
+            }
 
-                val itemModifier = when (index) {
-                    0 -> Modifier.gridItem(rowSpan = 2)
-                    6 -> Modifier.gridItem(columnSpan = 2)
-                    else -> Modifier
-                }
+            Box(
+                modifier = Modifier
+                    .background(colors[1], shape = RoundedCornerShape(16.dp))
+                    .fillMaxSize()
+            ) {
+                Text(
+                    text = "2",
+                    color = if (colors[1].luminance() > 0.5f) Color.Black else Color.White,
+                    modifier = Modifier.align(Alignment.Center),
+                    fontSize = 40.sp
+                )
+            }
 
-                val boxModifier = itemModifier
-                    .padding(2.dp)
-                    .fillMaxWidth()
-                    .background(bgColor, shape = RoundedCornerShape(16.dp))
-                    .let {
-                        if (index == 0) it.fillMaxHeight() else it.height(100.dp)
-                    }
+            Box(
+                modifier = Modifier
+                    .background(colors[2], shape = RoundedCornerShape(16.dp))
+                    .fillMaxSize()
+            ) {
+                Text(
+                    text = "3",
+                    color = if (colors[2].luminance() > 0.5f) Color.Black else Color.White,
+                    modifier = Modifier.align(Alignment.Center),
+                    fontSize = 40.sp
+                )
+            }
 
-                Box(
-                    modifier = boxModifier
-                ) {
-                    Text(
-                        text = "${index + 1}",
-                        color = textColor,
-                        modifier = Modifier.align(Alignment.Center),
-                        fontSize = 40.sp
-                    )
-                }
+            Box(
+                modifier = Modifier
+                    .gridItem(columnSpan = 2)
+                    .background(colors[3], shape = RoundedCornerShape(16.dp))
+                    .fillMaxSize()
+            ) {
+                Text(
+                    text = "4",
+                    color = if (colors[3].luminance() > 0.5f) Color.Black else Color.White,
+                    modifier = Modifier.align(Alignment.Center),
+                    fontSize = 40.sp
+                )
+            }
+
+            Box(
+                modifier = Modifier
+                    .gridItem(columnSpan = 3)
+                    .background(colors[4], shape = RoundedCornerShape(16.dp))
+                    .fillMaxSize()
+            ) {
+                Text(
+                    text = "5",
+                    color = if (colors[4].luminance() > 0.5f) Color.Black else Color.White,
+                    modifier = Modifier.align(Alignment.Center),
+                    fontSize = 40.sp
+                )
             }
         }
     }
