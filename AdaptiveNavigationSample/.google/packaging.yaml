@@ -7,7 +7,6 @@ categories:
 languages:    [Kotlin]
 solutions:
     - Mobile
-    - JetpackNavigation
 github:       android/adaptive-apps-samples
 level:        INTERMEDIATE
 apiRefs:
