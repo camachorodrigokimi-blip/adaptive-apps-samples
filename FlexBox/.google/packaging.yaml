@@ -1,5 +1,5 @@
-title: "Adaptive flexbox Layout in Jetpack Compose"
-description: "A sample demonstrating how to use the FlexBox API in Jetpack Compose to build flexible, flow-based adaptive layouts optimized for all form factors."
+title: "Adaptive layouts using FlexBox in Jetpack Compose"
+description: "A sample demonstrating how to use the FlexBox API in Jetpack Compose to build flexible, flow-based adaptive apps optimized for all form factors."
 status:       PUBLISHED
 technologies: [Android, JetpackCompose]
 categories:
