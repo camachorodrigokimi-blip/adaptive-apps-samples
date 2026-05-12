@@ -48,7 +48,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-
+// Standard nominal breakpoints for Window Width Size Classes
+private val BreakpointMediumWidth = 600.dp
+private val BreakpointExpandedWidth = 840.dp
 
 @Composable
 fun MediaQuerySample() {
@@ -80,7 +82,7 @@ fun MediaQuerySample() {
         Spacer(modifier = Modifier.height(16.dp))
 
         // --- Main Layout Adaptation ---
-        val isAtLeastMediumWindowWidth by derivedMediaQuery { windowWidth >= 600.dp }
+        val isAtLeastMediumWindowWidth by derivedMediaQuery { windowWidth >= BreakpointMediumWidth }
 
         val leftColumnContent = @Composable {
             PostureCard()
@@ -375,8 +377,8 @@ fun WindowInfoCard() {
     val isLandscape = windowWidth > windowHeight
 
     val widthSizeClass = when {
-        windowWidth < 600.dp -> "Compact"
-        windowWidth < 840.dp -> "Medium"
+        windowWidth < BreakpointMediumWidth -> "Compact"
+        windowWidth < BreakpointExpandedWidth -> "Medium"
         else -> "Expanded"
     }
     val heightSizeClass = when {
